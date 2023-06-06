@@ -4,6 +4,11 @@
     padding-bottom: 10px;
 }
 
+.search-form__container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
 .form-movie {
     display: flex;
     margin-bottom: 28px;

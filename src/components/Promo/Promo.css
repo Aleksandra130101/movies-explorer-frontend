@@ -3,6 +3,8 @@
 }
 
 .promo__container {
+    max-width: 1280px;
+    margin: auto;
     padding: 47px 70px 60px;
 }
 

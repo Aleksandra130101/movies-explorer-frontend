@@ -21,11 +21,11 @@ function AboutProject() {
 
             <div className="stages">
                 <div className="stage">
-                    <p className="stage__weekends stage__weekends_one">1 неделя</p>
+                    <p className="stage__weekends stage__weekends-one">1 неделя</p>
                     <p className="stage__description">Back-end</p>
                 </div>
                 <div className="stage">
-                    <p className="stage__weekends stage__weekends_four">4 недели</p>
+                    <p className="stage__weekends stage__weekends-four">4 недели</p>
                     <p className="stage__description">Front-end</p>
                 </div>
             </div>

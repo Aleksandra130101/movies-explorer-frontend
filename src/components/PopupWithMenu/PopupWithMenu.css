@@ -38,6 +38,11 @@
         background-size: cover;
         border: 0;
         align-self: flex-end;
+        cursor: pointer;
+    }
+
+    .popup-menu__button-close:hover {
+        opacity: 0.7;
     }
 
     .popup-menu__links {
@@ -84,6 +89,10 @@
         text-decoration: none;
         color: #000;
         margin-top: auto;
+    }
+
+    .popup-menu__accaunt:hover {
+        opacity: 0.7;
     }
 
     .popup-menu__accaunt-text {

@@ -25,6 +25,10 @@
     border: 0;
 }
 
+.form__logo:hover {
+    opacity: 0.7;
+}
+
 .form {
     width: 100%;
     display: flex;

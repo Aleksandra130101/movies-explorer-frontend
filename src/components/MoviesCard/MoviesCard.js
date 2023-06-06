@@ -12,7 +12,7 @@ function MoviesCard(data) {
                 <p className="movie__duration">{data.card.duration}</p>
 
                 <button className={`movie__like-button ${data.card.saved && (window.location.pathname === '/saved-movies') ?
-                ('movie__button-delete') : (data.card.saved) ? ('movie__like-button_red') : ('')}`} type="button"></button>
+                ('movie__button-delete') : (data.card.saved) ? ('movie__like-button-red') : ('')}`} type="button"></button>
             </div>
             <img className="movie__image" src={data.card.link} alt="картинка фильма"/>
         </div>

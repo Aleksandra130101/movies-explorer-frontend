@@ -7,12 +7,11 @@ import { useNavigate } from "react-router-dom";
 
 function Register() {
 
-
     const navigate = useNavigate();
 
-    function handleSubmit(e) {
-        console.log('тут');
-        e.preventDefault();
+    function handleSubmit(data) {
+
+        console.log(data);
 
         navigate('/signin', { replace: true });
     }
@@ -21,15 +20,15 @@ function Register() {
     return (
         <section className="container__forms">
             <Form
-                title={"Добро пожаловать!"}
                 onSubmit={handleSubmit}
+                title={"Добро пожаловать!"}
             >
                 <label className="form__input-signature">Имя</label>
                 <input
                     className="form__input"
                     type="text"
                     id="name-register"
-                    placeholder=""
+                    placeholder="Имя"
                     name="name"
                     required
                 />
@@ -38,18 +37,20 @@ function Register() {
                     className="form__input"
                     type="email"
                     id="email-register"
-                    placeholder=""
+                    placeholder="E-mail"
                     name="amail"
                     required
                 />
                 <label className="form__input-signature">Пароль</label>
                 <input
-                    className="form__input"
+                    className="form__input form__input-reg"
                     type="password"
                     id="password-register"
                     name="password"
+                    placeholder="Пароль"
                     required
                 />
+                <span className="form__input-error">Что-то пошло не так</span>
 
                 <button className="form__button form__button-register" type="submit">Зарегистрироваться</button>
                 <p className="form__button-signature">Уже зарегистрированы? <Link className="form__link" to="/signin">Войти</Link></p>

@@ -1,14 +1,15 @@
 import React from "react";
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
+
 import Form from "../Form/Form";
+
 
 function Login() {
 
     const navigate = useNavigate();
 
     function handleSubmit(e) {
-        console.log('тут');
         e.preventDefault();
 
         navigate('/profile', { replace: true });
@@ -25,7 +26,7 @@ function Login() {
                     className="form__input"
                     type="email"
                     id="email-login"
-                    placeholder=""
+                    placeholder="E-mail"
                     name="amail"
                     required
                 />
@@ -35,6 +36,7 @@ function Login() {
                     type="password"
                     id="password-login"
                     name="password"
+                    placeholder="Пароль"
                     required
                 />
 

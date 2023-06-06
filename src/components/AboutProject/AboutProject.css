@@ -1,5 +1,6 @@
 .about-project {
-    margin: 0;
+    max-width: 1280px;
+    margin: auto;
     padding: 110px 70px;
 }
 
@@ -70,12 +71,12 @@
     text-align: center;
 }
 
-.stage__weekends_one {
+.stage__weekends-one {
     background-color: #000;
     color: #fff;
 }
 
-.stage__weekends_four {
+.stage__weekends-four {
     background-color: #F2F2F2;
 }
 
@@ -88,7 +89,7 @@
     color: #A0A0A0;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 767.5px) {
     .about-project {
         padding: 90px 50px;
     }

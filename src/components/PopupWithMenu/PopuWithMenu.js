@@ -14,7 +14,7 @@ function PopupWithMenu({ onClose }) {
                 <button type="button" className="popup-menu__button-close" onClick={onClose}></button>
 
                 <nav className="popup-menu__links">
-                    <NavLink to='/profile' className={({ isActive }) => isActive ?
+                    <NavLink to='/' className={({ isActive }) => isActive ?
                         "popup-menu__link popup-menu__link-active" : "popup-menu__link"
                     }>Главная</NavLink>
 

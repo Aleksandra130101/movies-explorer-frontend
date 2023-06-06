@@ -2,6 +2,11 @@
     margin: 0 70px 119px;
 }
 
+.portfolio__container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
 .portfolio__title {
     margin: 0;
     padding: 0;
@@ -45,8 +50,10 @@
 }
 
 .portfolio__link-image {
-    width: 29px;
-    height: 60px;
+    margin-top: 8px;
+    margin-right: 5px;
+    width: 20px;
+    height: 40px;
     background-color: #fff;
     background-image: url(../../images/link.svg);
     background-repeat: no-repeat;
@@ -54,6 +61,12 @@
     background-size: contain;
     border: 0;
 }
+
+.portfolio__link-image:hover {
+    opacity: 0.7;
+}
+
+
 
 @media screen and (max-width: 1024px) {
     .portfolio {

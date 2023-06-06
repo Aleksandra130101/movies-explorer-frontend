@@ -2,14 +2,14 @@ import React from 'react';
 import logo from '../../images/logo.svg';
 import './Header.css';
 import Navigation from '../Navigation/Navigation.js';
-import { Routes, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Header({ loggedIn, onOpenMenu }) {
     return (
 
-        <header className={`header ${!loggedIn ? 'header_entrance' : ''}`}>
+        <header className={`header ${!loggedIn ? 'header-entrance' : ''}`}>
             <div className='header__container'>
-                <button className='header__logo'></button>
+                <Link to='/' className='header__logo'></Link>
 
                 <Navigation loggedIn={loggedIn} onOpenMenu={onOpenMenu}></Navigation>
             </div>

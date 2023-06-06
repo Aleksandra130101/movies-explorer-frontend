@@ -11,15 +11,15 @@ function Navigation({ loggedIn, onOpenMenu }) {
         loggedIn
             ? (
                 <>
-                    <div className='navbar navbar_main'>
+                    <div className='navbar navbar-main'>
                         <div className='navbar__movies'>
 
                             <NavLink to="/movies" className={({ isActive }) => isActive ?
-                                "navbar__link navbar__link_movies navbar__link_movies-active" : "navbar__link navbar__link_movies"
+                                "navbar__link navbar__link-movies navbar__link-movies_active" : "navbar__link navbar__link-movies"
                             }>Фильмы</NavLink>
 
                             <NavLink to="/saved-movies" className={({ isActive }) => isActive ?
-                                "navbar__link navbar__link_movies navbar__link_movies-active" : "navbar__link navbar__link_movies"
+                                "navbar__link navbar__link-movies navbar__link-movies_active" : "navbar__link navbar__link-movies"
                             }>Сохраненные фильмы</NavLink>
 
                         </div>
@@ -28,14 +28,14 @@ function Navigation({ loggedIn, onOpenMenu }) {
                             <p className='navbar__accaunt-text'>Аккаунт</p>
                         </Link>
                     </div>
-                    <div className='navbar navbar_menu'>
+                    <div className='navbar navbar-menu'>
                         <button onClick={onOpenMenu} type='button' className='navbar__button-menu'></button>
                     </div>
                 </>
             )
             : (
-                <div className='navbar navbar_entrance'>
-                    <Link to='/signup' className='navbar__link navbar__link_reg'>Регистрация</Link>
+                <div className='navbar navbar-entrance'>
+                    <Link to='/signup' className='navbar__link navbar__link-reg'>Регистрация</Link>
                     <button className='navbar__button-log' onClick={() => navigate("/signin", { replace: true })}>Войти</button>
                 </div>
             )
