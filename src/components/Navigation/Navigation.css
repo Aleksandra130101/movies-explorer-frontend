@@ -118,6 +118,7 @@
 @media screen and (max-width: 480px) {
     .navbar__link_reg {
         font-size: 10px;
+        margin-right: 14px;
     }
 
     .navbar__button-log {
