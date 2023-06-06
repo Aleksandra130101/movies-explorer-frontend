@@ -1,0 +1,26 @@
+.loading-cards {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.loading-cards__button {
+    padding: 0;
+    margin: 50px 0 80px;
+    width: 320px;
+    height: 36px;
+    text-align: center;
+    background-color: #F9F9F9;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    border: 0;
+}
+
+@media screen and (max-width: 767.5px) {
+    .loading-cards__button {
+        width: 240px;
+        height: 36px;
+    }
+}

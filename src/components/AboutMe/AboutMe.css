@@ -1,0 +1,133 @@
+.about-me {
+    margin: 0;
+    padding: 110px 70px 100px;
+}
+
+.about-me__container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.resume{
+    margin-top: 66px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.resume__text {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.resume__text-name {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 18px;
+    font-size: 50px;
+    line-height: 58px;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+}
+
+.resume__text-job {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 26px;
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 500;
+}
+
+.resume__text-about {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+}
+
+.resume__text-git {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    margin-top: auto;
+    text-decoration: none;
+    color: #000;
+}
+
+.resume__text-git:hover {
+    opacity: 0.7;
+}
+
+.resume__image {
+    width: 270px;
+    height: 327px;
+    box-sizing: border-box;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+
+@media screen and (max-width: 1024px) {
+    .about-me {
+        padding: 90px 50px;
+    }
+    .resume__text {
+        max-width: 364px;
+    }
+    .resume__text-name {
+        margin-bottom: 16px;
+        font-size: 40px;
+        line-height: 40px;
+    }
+    .resume__text-job {
+        margin-bottom: 20px;
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .resume__text-about {
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .resume__image {
+        width: 255px;
+        height: 307px;
+    }
+}
+
+@media screen and (max-width: 767.5px) {
+    .about-me {
+        padding: 70px 14px;
+    }
+    .resume {
+        margin-top: 60px;
+        flex-direction: column;
+        align-items: center;
+        flex-direction: column-reverse;
+    }
+    .resume__image {
+        width: 292px;
+        height: 352px;
+        margin-bottom: 40px;
+    }
+    .resume__text {
+        max-width: 292px;
+    }
+    .resume__text-name {
+        margin-bottom: 20px;
+        font-size: 30px;
+        line-height: 36px;
+    }
+    .resume__text-about {
+        margin-bottom: 40px;
+        font-size: 11px;
+        line-height: 16px;
+    }
+    .resume__text-job {
+        font-size: 11px;
+        line-height: 16px;
+    }
+}

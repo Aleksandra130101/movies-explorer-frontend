@@ -1,0 +1,139 @@
+.popup-menu {
+    opacity: 0;
+}
+
+@media screen and (max-width: 1024px) {
+    .popup-menu {
+        min-width: 100%;
+        min-height: 100%;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        background: rgba(0, 0, 0, .5);
+        position: fixed;
+        top: 0;
+        display: flex;
+        cursor: pointer;
+        justify-content: end;
+        opacity: 1;
+    }
+
+    .popup-menu__container {
+        padding-bottom: 90px;
+        background-color: #fff;
+        min-width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .popup-menu__button-close {
+        margin: 22.44px 22.44px 107px 0;
+        width: 30px;
+        height: 30px;
+        background-color: #fff;
+        background-image: url(../../images/close.svg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border: 0;
+        align-self: flex-end;
+        cursor: pointer;
+    }
+
+    .popup-menu__button-close:hover {
+        opacity: 0.7;
+    }
+
+    .popup-menu__links {
+        width: 340px;
+        margin: 0 90px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .popup-menu__link {
+        margin: 0;
+        padding: 0;
+        margin-bottom: 28px;
+        text-decoration: none;
+        color: #000;
+        font-size: 18px;
+        line-height: 22px;
+        font-weight: 500;
+    }
+
+    .popup-menu__link:hover {
+        opacity: 0.7;
+    }
+
+    .popup-menu__link-active {
+        border-bottom: 2px solid #000;
+        padding-bottom: 4px;
+        margin-bottom: 22px;
+    }
+
+    .popup-menu__link:last-child {
+        margin-bottom: 0;
+    }
+
+    .popup-menu__accaunt {
+        width: 100px;
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid rgba(170, 170, 170, .2);
+        border-radius: 50px;
+        text-decoration: none;
+        color: #000;
+        margin-top: auto;
+    }
+
+    .popup-menu__accaunt:hover {
+        opacity: 0.7;
+    }
+
+    .popup-menu__accaunt-text {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 16px;
+    }
+
+    .popup-menu__accaunt-image {
+        margin: 0;
+        margin-right: 7px;
+        width: 12px;
+        height: 14px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .popup-menu__container {
+        min-width: 100%;
+        padding-bottom: 46px;
+    }
+
+    .popup-menu__links {
+        width: 300px;
+        margin: 0 10px;
+    }
+
+    .popup-menu__link {
+        margin-bottom: 24px;
+    }
+
+    .popup-menu__accaunt-text {
+        font-size: 14px;
+    }
+
+    .popup-menu__button-close {
+        margin: 13.44px 13.44px 99.44px;
+    }
+    .popup-menu__link-active {
+        padding-bottom: 7px;
+        margin-bottom: 15px;
+    }
+}

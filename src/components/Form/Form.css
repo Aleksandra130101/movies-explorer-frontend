@@ -1,0 +1,46 @@
+.form-container {
+    margin: 0;
+    padding: 0;
+    width: 396px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form__title {
+    margin: 40px 0;
+    padding: 0;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 29px;
+}
+
+.form__logo {
+    width: 38px;
+    height: 38px;
+    background-color: #fff;
+    background-image: url('../../images/logo.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    border: 0;
+}
+
+.form__logo:hover {
+    opacity: 0.7;
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 767.5px) {
+    .form-container {
+        align-items: center;
+        width: 260px;
+    }
+    .form__title {
+        margin: 50px 0 80px;
+    }
+}
