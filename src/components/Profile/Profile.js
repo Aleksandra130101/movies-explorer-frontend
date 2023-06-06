@@ -7,7 +7,7 @@ function Profile() {
     return (
         <section className="profile">
             <div className="profile__container">
-                <h2 className="profile__title">Привет, Александра</h2>
+                <h2 className="profile__title">Привет, Виталий!</h2>
 
                 <div className="profile__about">
                     <div className="profile__user">
@@ -15,7 +15,7 @@ function Profile() {
                         <p className="user-property">Александра</p>
                     </div>
                     <div className="profile__user">
-                        <p className="user-property">Email</p>
+                        <p className="user-property">E-mail</p>
                         <p className="user-property">averianovaalex@mail.ru</p>
                     </div>
                 </div>

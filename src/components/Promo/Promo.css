@@ -3,11 +3,12 @@
 }
 
 .promo__container {
-    padding: 50px 70px 60px;
+    padding: 47px 70px 60px;
 }
 
 .promo__title {
     margin: 0;
+    padding: 0;
     margin-bottom: 102px;
     font-size: 40px;
     line-height: 52px;
@@ -48,6 +49,7 @@
     .promo__title {
         text-align: center;
         margin-bottom: 140px;
+        max-width: 680px;
     }
 }
 

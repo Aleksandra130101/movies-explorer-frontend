@@ -9,7 +9,7 @@ function Header({ loggedIn, onOpenMenu }) {
 
         <header className={`header ${!loggedIn ? 'header_entrance' : ''}`}>
             <div className='header__container'>
-                <a href='/'><img className='header__logo' src={logo} alt='логотип' /></a>
+                <button className='header__logo'></button>
 
                 <Navigation loggedIn={loggedIn} onOpenMenu={onOpenMenu}></Navigation>
             </div>
