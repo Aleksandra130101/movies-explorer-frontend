@@ -1,0 +1,54 @@
+.header {
+    margin: 0;
+    padding: 0;
+}
+
+.header__container {
+    margin: 0;
+    padding: 18px 70px;
+    display: flex;
+}
+
+.header__container_log-reg {
+    padding: 0 0 40px 0;
+    height: 217px;
+    justify-content: center;
+    align-items: end;
+}
+
+.header__log-reg {
+    width: 396px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header_entrance {
+    background-color: #F3C1F8;
+}
+
+.header__logo {
+    width: 38px;
+}
+
+.header__title {
+    margin: 0;
+    margin-top: 40px;
+    padding: 0;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 29.05px;
+}
+
+@media screen and (max-width: 1024px) {
+    .header__container {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .header__container {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+}

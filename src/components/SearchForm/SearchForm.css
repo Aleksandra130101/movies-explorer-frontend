@@ -1,0 +1,92 @@
+.search-form {
+    margin: 0;
+    padding-top: 80px;
+    padding-bottom: 10px;
+}
+
+.form-movie {
+    display: flex;
+    margin-bottom: 28px;
+    align-items: center;
+}
+
+.form-movie__input {
+    flex-shrink: 0;
+    flex-grow: 1;
+    padding-left: 20px;
+    margin-right: 10px;
+    border-radius: 8px;
+    border: 0;
+    height: 50px;
+    background-color: #F9F9F9;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+}
+
+.form-movie__button {
+    margin-left: auto;
+    border-radius: 8px;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    padding: 0;
+    background-color: #000;
+    background-image: url(../../images/поиск.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.form-movie__button:hover {
+    opacity: 0.7;
+}
+
+.form-movie__switch {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 39px;
+    border-bottom: 1px solid #E8E8E8;
+}
+
+.form-movie__button-switch {
+    border: 0;
+    margin-right: 12px;
+    width: 36px;
+    height: 20px;
+    background-color: #fff;
+    background-image: url('../../images/slider.svg');
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.form-movie__text-switch {
+    display: flex;
+    margin: 0;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 400;
+    text-align: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 1024px) {
+    .form-movie {
+        margin-bottom: 40px;
+    }
+}
+
+@media screen and (max-width: 767.5px) {
+    .search-form {
+        padding: 80px 14px 10px;
+    }
+    .form-movie {
+        margin-bottom: 46px;
+    }
+    .form-movie__input {
+        height: 44px;
+    }
+    .form-movie__text-switch {
+        font-size: 11px;
+    }
+}
