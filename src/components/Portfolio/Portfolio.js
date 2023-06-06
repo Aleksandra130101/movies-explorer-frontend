@@ -11,17 +11,17 @@ function Portfolio() {
             <div className="portfolio__items">
                 <div className="portfolio__item">
                     <Link className="portfolio__link">Статичный сайт</Link>
-                    <img className="portfolio__link-image" src={link} alt="стрелочка" />
+                    <button className="portfolio__link-image" alt="стрелочка"></button>
                 </div>
 
                 <div className="portfolio__item">
                     <Link className="portfolio__link">Адаптивный сайт</Link>
-                    <img className="portfolio__link-image" src={link} alt="стрелочка" />
+                    <button className="portfolio__link-image" alt="стрелочка"></button>
                 </div>
 
                 <div className="portfolio__item">
                     <Link className="portfolio__link">Одностраничное приложение</Link>
-                    <img className="portfolio__link-image" src={link} alt="стрелочка" />
+                    <button className="portfolio__link-image" alt="стрелочка"></button>
                 </div>
             </div>
         </section>

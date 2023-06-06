@@ -36,11 +36,23 @@
     font-size: 30px;
     font-weight: 400;
     line-height: 50px;
+    letter-spacing: -0.04em;
 }
 
 
 .portfolio__link:hover {
     opacity: 0.7;
+}
+
+.portfolio__link-image {
+    width: 29px;
+    height: 60px;
+    background-color: #fff;
+    background-image: url(../../images/link.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 0;
 }
 
 @media screen and (max-width: 1024px) {
@@ -67,7 +79,9 @@
         line-height: 28px;
     }
     .portfolio__link-image {
-        width: 18px;
-        height: 28px;
+        width: 10px;
+        height: 18px;
+        margin-top: 2px;
+        margin-right: 5px;
     }
 }
