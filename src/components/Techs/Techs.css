@@ -17,6 +17,7 @@
     font-size: 50px;
     line-height: 58px;
     font-weight: 400;
+    letter-spacing: -0.04em;
 }
 
 .techs__subtitle {
@@ -26,6 +27,7 @@
     font-size: 14px;
     line-height: 20px;
     font-weight: 400;
+    letter-spacing: -0.04em;
 }
 
 .techs__icons {
@@ -49,8 +51,9 @@
     justify-content: center;
     align-items: center;
     font-size: 14px;
-    line-height: 16.94px;
+    line-height: 17px;
     font-weight: 400;
+    letter-spacing: -0.04em;
 }
 
 @media screen and (max-width: 1024px) {
@@ -90,7 +93,7 @@
     .techs__title {
         margin-bottom: 24px;
         font-size: 30px;
-        font-size: 36px;
+        line-height: 36px;
     }
     .techs__subtitle {
         width: 292px;
