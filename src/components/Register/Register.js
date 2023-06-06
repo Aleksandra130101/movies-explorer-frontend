@@ -51,7 +51,7 @@ function Register() {
                     required
                 />
 
-                <button className="form__button" type="submit">Зарегистрироваться</button>
+                <button className="form__button form__button-register" type="submit">Зарегистрироваться</button>
                 <p className="form__button-signature">Уже зарегистрированы? <Link className="form__link" to="/signin">Войти</Link></p>
             </Form>
 

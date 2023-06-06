@@ -61,7 +61,6 @@
 .form__link {
     margin: 0;
     padding: 0;
-    padding-left: 6px;
     text-decoration: none;
     color:#000;
 }
@@ -92,9 +91,6 @@
         margin-top: 14px;
         font-size: 12px;
         line-height: 15px;
-    }
-    .form__link {
-        padding-left: 7px;
     }
 }
 

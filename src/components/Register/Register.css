@@ -1,9 +1,9 @@
-.form__button {
-    margin-top: 69px;
+.form__button-register {
+    margin-top: 71px;
 }
 
 @media screen and (max-width: 767.5px) {
-    .form__button {
+    .form__button-register {
         margin-top: 157px;
     }
 }
