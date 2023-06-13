@@ -1,0 +1,97 @@
+.container__forms {
+    margin: 0;
+    padding: 70px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.form__input-signature {
+    font-size: 10px;
+    line-height: 12px;
+    font-weight: 400;
+    color: #a0a0a0;
+    margin-bottom: 10px;
+}
+
+.form__input {
+    border: 0;
+    width: 100%;
+    height: 46px;
+    background: #F9F9F9;
+    border-radius: 8px;
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 500;
+}
+
+.form__button {
+    padding: 0;
+    width: 100%;
+    height: 45px;
+    margin: 0;
+    margin-top: 159px;
+    background-color: #000;
+    border: 0;
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 500;
+    color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.form__button:hover {
+    opacity: 0.7;
+}
+
+.form__button-signature {
+    margin: 0;
+    color: #A0A0A0;
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    text-align: center;
+}
+
+.form__link {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color:#000;
+}
+
+.form__link:hover {
+    opacity: 0.7;
+}
+
+@media screen and (max-width: 1024px) {
+    .container__forms {
+        padding: 232px 0;
+    }
+    .form__input-signature {
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 767.5px) {
+    .container__forms {
+        padding: 56px 0 30px;
+    }
+    .form__button {
+        margin-top: 247px;
+        font-size: 12px;
+        line-height: 15px;
+    }
+    .form__button-signature {
+        margin-top: 14px;
+        font-size: 12px;
+        line-height: 15px;
+    }
+}
+
+
