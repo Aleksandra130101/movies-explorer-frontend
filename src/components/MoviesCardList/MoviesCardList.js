@@ -7,7 +7,6 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 function MoviesCardList({
   movies,
   visibleItems,
-  showButton,
   handleShowMoreMovies,
   handleLikeClick,
   handleDeleteLikeClick,
@@ -27,8 +26,6 @@ function MoviesCardList({
     }, false)
   }
 
-
-
   return (
     <section className="movies">
       {
@@ -46,7 +43,7 @@ function MoviesCardList({
                   isFavorite={isFavorite(movie)}
                 />
               ))}
-              {showButton && <LoadingCards onShowMoreMovies={handleShowMoreMovies} />}
+              {(movies.length - 2 >= visibleItems) && <LoadingCards onShowMoreMovies={handleShowMoreMovies} />}
             </>
           )
       }

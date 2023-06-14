@@ -2,11 +2,8 @@ import React from "react";
 import SearchForm from "../SearchForm/SearchForm.js";
 import './Movies.css';
 import MoviesCardList from "../MoviesCardList/MoviesCardList.js";
-import LoadingCards from "../LoadingCards/LoadingCards.js";
+
 import Preloader from "../Preloader/Preloader.js";
-import { filterMovies } from "../../utils/constants.js";
-import { apiMovies } from "../../utils/MoviesApi.js";
-import { apiMain } from "../../utils/MainApi.js";
 
 import { useState, useEffect } from "react";
 
@@ -18,17 +15,20 @@ function Movies({
     handleDeleteLikeClick,
     setIsCheked,
     isNotFound,
-    isCheked
+    isCheked,
+    handleChecked,
+    setShortFilms
 }) {
 
     const [visibleItems, setVisibleItems] = useState(7);
     const [quantityAddItems, setQuantityAddItems] = useState(5);
-    const [showButton, setShowButton] = useState(true);
+    const [showButton, setShowButton] = useState(false);
 
     //const savedMovies = JSON.parse(localStorage.getItem('saved-movies'));
 
 
     useEffect(() => {
+        
         if (window.innerWidth <= 320) {
             setVisibleItems(5);
             setQuantityAddItems(5);
@@ -58,14 +58,11 @@ function Movies({
 
     function handleShowMoreMovies() {
         setVisibleItems(visibleItems + quantityAddItems);
-        if (visibleItems >= movies.length - 5) {
-            setShowButton(false);
-        }
     }
 
     return (
         <div className="container-movies">
-            <SearchForm handleSearchMovies={handleSearchMovies} setIsCheked={setIsCheked} isCheked={isCheked}/>
+            <SearchForm handleSearchMovies={handleSearchMovies} handleChecked={handleChecked} setShortFilms={setShortFilms}/>
             {moviesLoading
                 ? (
                     <Preloader />
@@ -75,14 +72,12 @@ function Movies({
                     <MoviesCardList
                         movies={movies}
                         visibleItems={visibleItems}
-                        showButton={showButton}
                         handleShowMoreMovies={handleShowMoreMovies}
                         handleLikeClick={handleLikeClick}
                         handleDeleteLikeClick={handleDeleteLikeClick}
                         isSaved={false}
                         isNotFound={isNotFound}
                     />
-
                 )
             }
         </div>

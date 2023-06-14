@@ -1,5 +1,3 @@
-import { json } from "react-router-dom";
-
 class MainApi {
     constructor(config) {
         this._urlMain = config.urlMain;

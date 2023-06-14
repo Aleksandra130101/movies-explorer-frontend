@@ -1,41 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './Login.css';
 import { Link } from 'react-router-dom';
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-
+import ValidateForm from "../../hook/ValidateForm";
 import Form from "../Form/Form";
 
 
-function Login({ handleLogin }) {
+function Login({ handleLogin, error }) {
 
-    const [formValue, setFormValue] = useState({
-        email: '',
-        password: '',
-    });
+    const { values, handleChange, errors, isValid, resetForm } = ValidateForm();
 
-    function handleDataUser(evt) {
-        const { name, value } = evt.target;
 
-        setFormValue({
-            ...formValue,
-            [name]: value
-        });
-    }
-
+    useEffect(() => {
+        resetForm()
+    }, [resetForm])
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log(formValue)
+        console.log(values)
 
-        const { email, password } = formValue;
-        if (!email || !password) {
-            return
-        }
-        handleLogin(email, password)
-            .then(() => {
-                setFormValue({ email: '', password: '' });
-            })
+
+        handleLogin(values.email, values.password)
+        //.then(() => {
+        //  setFormValue({ email: '', password: '' });
+        //})
     }
 
     return (
@@ -43,30 +30,42 @@ function Login({ handleLogin }) {
             <Form
                 title={"Рады видеть!"}
                 onSubmit={handleSubmit}
+                novalidate
             >
                 <label className="form__input-signature">E-mail</label>
                 <input
-                    onChange={handleDataUser}
+                    onChange={handleChange}
                     className="form__input"
                     type="email"
                     id="email-login"
                     placeholder="E-mail"
                     name="email"
                     required
+                    value={values.email || ''}
+                    pattern='[a-z0-9]+@[a-z]+\.[a-z]{2,3}'
                 />
                 <label className="form__input-signature">Пароль</label>
                 <input
-                    onChange={handleDataUser}
+                    onChange={handleChange}
                     className="form__input"
                     type="password"
                     id="password-login"
                     name="password"
                     placeholder="Пароль"
+                    value={values.password || ''}
                     required
                 />
+                {
+                    !isValid
+                        ? <span className="form__input-error">Что-то пошло не так...</span>
+                        : ''
+                }
 
-                <button className="form__button" type="submit">Войти</button>
-                <p className="form__button-signature">Еще не зарегистрированы? <Link className="form__link" to="/signup">Регистрация</Link></p>
+                <div className="button__container">
+                    <span className="error">{error}</span>
+                    <button className={`form__button ${isValid ? '' : 'button__noactive'}`} type="submit">Войти</button>
+                    <p className="form__button-signature">Еще не зарегистрированы? <Link className="form__link" to="/signup">Регистрация</Link></p>
+                </div>
             </Form>
 
         </div>

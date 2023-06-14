@@ -68,7 +68,7 @@
     opacity: 0.7;
 }
 
-.profile__saved_noactive {
+.button__noactive {
    pointer-events: none;
    opacity: 0.7;
 }
@@ -81,6 +81,16 @@
     line-height: 16px;
     font-weight: 400px;
     cursor: pointer;
+}
+
+.error {
+    margin: 0;
+    color: #FF004C;
+    font-size: 11px;
+    line-height: 14px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .profile__edit:hover {
@@ -97,6 +107,19 @@
     text-align: center;
     text-decoration: none;
     cursor: pointer;
+}
+
+.edit-success {
+    font-style: italic;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    margin-top: 30px;
+    padding: 0;
+    color: #FF004C;
+    font-size: 20px;
+    line-height: 22px;
+    font-weight: 500;
 }
 
 .profile__logout:hover {

@@ -65,6 +65,10 @@
     cursor: pointer;
 }
 
+.navbar__button-menu-pink {
+    background-color: #F3C1F8;
+}
+
 .navbar__button-menu:hover {
     opacity: 0.7;
 }

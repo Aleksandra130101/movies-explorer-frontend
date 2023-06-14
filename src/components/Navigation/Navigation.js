@@ -7,6 +7,7 @@ function Navigation({ loggedIn, onOpenMenu }) {
 
     const navigate = useNavigate();
 
+
     return (
         loggedIn
             ? (

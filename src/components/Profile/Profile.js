@@ -1,16 +1,18 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import './Profile.css';
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { apiMain } from "../../utils/MainApi";
-import { validEmail, validName } from "../../utils/constants";
+import { validName } from "../../utils/constants";
+import { errors } from "../../utils/constants";
 
-function Profile({ signout, setCurrentUser }) {
+function Profile({ signout, setCurrentUser, currentUser }) {
 
     const [isEdit, setIsEdit] = useState(false);
     const [formValue, setFormValue] = useState({});
-    const [isValid, setIsValid] = useState(true);
+    const [isValid, setIsValid] = useState(false);
+    const [error, setErrors] = useState('');
+    const [isShow, setIsShow] = useState(false);
 
-    const { currentUser } = useContext(CurrentUserContext);
+
 
     useEffect(() => {
         setFormValue({
@@ -19,45 +21,49 @@ function Profile({ signout, setCurrentUser }) {
         })
     }, [currentUser, setFormValue]);
 
-    useEffect(() => {
-        if (validName.test(formValue.name) && validEmail.test(formValue.email)) {
-            setIsValid(true)
-        } else {
-            setIsValid(false)
-        }
-    })
-
 
     function handleChange(e) {
+        setErrors('')
         const { name, value } = e.target;
 
         setFormValue({
             ...formValue,
             [name]: value,
         })
+
+        if (e.target.validationMessage) {
+            setIsValid(false)
+        } else {
+            setIsValid(true)
+        }
     }
-    console.log(currentUser)
 
     function handleSubmit(e) {
         e.preventDefault();
 
+        setIsShow(true);
 
-        if (formValue.name === currentUser.name && formValue.email === currentUser.email) {
-            setIsEdit(true)
-            return
-        }
+        setTimeout(() => {
+            if (formValue.name === currentUser.name && formValue.email === currentUser.email) {
+                setIsEdit(false);
+                return
+            }
 
-        apiMain.updateProfile(formValue)
-            .then(() => {
-                setCurrentUser({
-                    ...currentUser,
-                    email: formValue.email,
-                    name: formValue.name,
+            apiMain.updateProfile(formValue)
+                .then(() => {
+                    setCurrentUser({
+                        ...currentUser,
+                        email: formValue.email,
+                        name: formValue.name,
+                    })
+                    setIsEdit(false);
+                    setIsShow(false);
                 })
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+                .catch((err) => {
+                    setErrors(errors.USER_NOT_UNIQUE);
+                    console.log(err);
+                })
+        }, 3000)
 
     }
 
@@ -75,7 +81,19 @@ function Profile({ signout, setCurrentUser }) {
                         <p className="user-property">Имя</p>
 
                         {isEdit
-                            ? <input className="user-property" placeholder="Имя" defaultValue={currentUser.name} name="name" type="text" id="name" required minLength="2" maxLength="30" onChange={handleChange} />
+                            ? <input
+                                className="user-property"
+                                placeholder="Имя"
+                                defaultValue={currentUser.name}
+                                name="name"
+                                type="text"
+                                id="name"
+                                required
+                                minLength="2"
+                                maxLength="30"
+                                onChange={handleChange}
+                                pattern={validName}
+                            />
                             : <p className="user-property">{currentUser.name}</p>
                         }
 
@@ -84,14 +102,32 @@ function Profile({ signout, setCurrentUser }) {
                         <p className="user-property">E-mail</p>
 
                         {isEdit
-                            ? <input className="user-property" placeholder="Email" defaultValue={currentUser.email} name="email" type="email" id="email" required minLength="2" maxLength="30" onChange={handleChange} />
-                            : <p className="user-property">currentUser.email</p>
+                            ? <input
+                                className="user-property"
+                                placeholder="Email"
+                                defaultValue={currentUser.email}
+                                name="email"
+                                type="email"
+                                id="email"
+                                required
+                                minLength="2"
+                                maxLength="30"
+                                onChange={handleChange}
+                                pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
+                            />
+                            : <p className="user-property">{currentUser.email}</p>
                         }
 
                     </div>
+
                 </div>
+                {isShow && <span className="edit-success">Данные сохранены!!!</span>}
                 {isEdit
-                    ? <button onClick={handleSubmit} className={`profile__saved ${isValid ? '' : 'profile__saved_noactive'}`} type="submit" disabled={isValid ? false : true}>Сохранить</button>
+                    ? <>
+                        <span className="error">{error}</span>
+                        <button onClick={handleSubmit} className={`profile__saved ${isValid ? '' : 'button__noactive'}`} type="submit" disabled={isValid ? false : true}>Сохранить</button>
+                    </>
+
                     : <>
                         <button onClick={handleOpenEditForm} className='profile__edit' type='button'>Редактировать</button>
                         <button onClick={signout} className='profile__logout'>Выйти из аккаунта</button>

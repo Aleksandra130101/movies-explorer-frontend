@@ -2,17 +2,20 @@ import React from "react";
 import './SearchForm.css';
 import { useState } from "react";
 
-function SearchForm({ handleSearchMovies, setIsCheked, isCheked}) {
+function SearchForm({ handleSearchMovies, handleChecked }) {
 
-    const [inputValue, setInputValue] = useState({ movie: '' });
+    const [inputValue, setInputValue] = useState({ movie: JSON.parse(localStorage.getItem('keyword')) || '' });
+    const [isChecked, setIsChecked] = useState(JSON.parse(localStorage.getItem('isChecked') || false));
 
     function onSearchMovies(e) {
         e.preventDefault();
 
-        if (inputValue) {
+        if (inputValue.movie === '') {
+            localStorage.setItem('keyword', JSON.stringify(''));
+        } else {
             localStorage.setItem('keyword', JSON.stringify(inputValue.movie));
-            handleSearchMovies();
-        }   
+        }
+        handleSearchMovies();
     }
 
     function handleDataMovie(e) {
@@ -22,7 +25,15 @@ function SearchForm({ handleSearchMovies, setIsCheked, isCheked}) {
     }
 
     function onChecked(e) {
-        setIsCheked(e.target.checked);
+        setIsChecked(e.target.checked)
+
+        if (e.target.checked) {
+            localStorage.setItem('isChecked', JSON.stringify(e.target.checked))
+        } else {
+            localStorage.removeItem('isChecked');
+        }
+
+        handleChecked(e.target.checked);
     }
 
     return (
@@ -34,7 +45,7 @@ function SearchForm({ handleSearchMovies, setIsCheked, isCheked}) {
                 </form>
 
                 <label className="checkbox" htmlFor="checkbox">
-                    <input className="checkbox__input" type="checkbox" id="checkbox" onChange={onChecked} checked={isCheked}></input>
+                    <input className="checkbox__input" type="checkbox" id="checkbox" onChange={onChecked} checked={isChecked}></input>
 
                     <span className="checkbox__inner">Короткометражки</span>
                 </label>

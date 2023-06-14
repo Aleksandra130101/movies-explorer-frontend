@@ -4,37 +4,17 @@ import './MoviesCard.css';
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-function MoviesCard({isFavorite, ...props}) {
-    
-    //const { savedMovies } = useContext(CurrentUserContext);
-    
-    //console.log(props);
-    
-    //const [isLiked, setIsLiked] = useState(savedMovies.map((movie) => movie._id).includes(props.movie._id));
-    
+function MoviesCard({isFavorite, ...props}) {    
 
     function onLikeClick() {
         props.handleLikeClick(props.movie)
-        //setIsLiked(true);
-        //props.handleLikeClick(props.movie);
     }
-
-    //function getIdCard() {
-      //  const idMovie = savedMovies.filter((movie) => movie._id === props.movie._id)
-        //return idMovie
-    //}
 
     function onDeleteLike() {
         props.handleDeleteLikeClick(props.movie);
-        //setIsLiked(false);
-        //props.handleDeleteLikeClick(getIdCard()[0]._id);
     }
 
     const location = useLocation();
-
-    //const cardLikeButtonClassName = (
-      //  `movie__like-button ${isLiked && 'movie__like-button-red'}`
-    //);
 
     const urlImage = (
         `${location.pathname === '/saved-movies' ? props.movie.image : `https://api.nomoreparties.co${props.movie.image.url}`}`
@@ -51,7 +31,7 @@ function MoviesCard({isFavorite, ...props}) {
             <div className="movie__direction">
                 <h3 className="movie__name">{props.movie.nameRU}</h3>
 
-                <p className="movie__duration">{props.movie.duration}</p>
+                <p className="movie__duration">{Math.floor(props.movie.duration / 60) + " ч "+ (props.movie.duration % 60 === 0 ? "" : props.movie.duration % 60 + " м")}</p>
 
                 {location.pathname === '/movies'  && !isFavorite && (
                     <button className="movie__like-button" onClick={onLikeClick} type="button"/>

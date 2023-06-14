@@ -2,45 +2,25 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Form from "../Form/Form";
 import './Register.css';
-import { validName, validEmail } from "../../utils/constants";
-
-
+import { validName } from "../../utils/constants";
+import ValidateForm from "../../hook/ValidateForm.js";
 import { useState } from "react";
 
-function Register({ handleRegister }) {
 
-    const [formvalue, setFormValue] = useState({
-        name: "",
-        email: "",
-        password: "",
-    });
+function Register({ handleRegister, error }) {
 
-    const [isValid, setIsValid] = useState(false);
+    const { values, handleChange, isValid, resetForm } = ValidateForm();
 
     useEffect(() => {
-        console.log(formvalue);
-        if (validName.test(formvalue.name) && validEmail.test(formvalue.email) && formvalue.password) {
-            setIsValid(true);
-        } else {
-            setIsValid(false);
-        }
-    })
-
-
-    function handleDataNewUser(evt) {
-        const { name, value } = evt.target;
-
-        setFormValue({
-            ...formvalue,
-            [name]: value
-        });
-    }
+        resetForm()
+    }, [resetForm])
 
     function handleSubmit(e) {
         e.preventDefault();
 
-        const { name, email, password } = formvalue;
-        handleRegister(name, email, password);
+        console.log(values.name, values.email, values.password)
+
+        handleRegister(values.name, values.email, values.password);
     }
 
 
@@ -49,36 +29,44 @@ function Register({ handleRegister }) {
             <Form
                 onSubmit={handleSubmit}
                 title={"Добро пожаловать!"}
+                novalidate
             >
                 <label className="form__input-signature">Имя</label>
                 <input
-                    onChange={handleDataNewUser}
+                    onChange={handleChange}
                     className="form__input"
                     type="text"
                     id="name-register"
                     placeholder="Имя"
                     name="name"
+                    minLength={2}
+                    maxLength={30}
+                    value={values.name || ''}
+                    pattern={validName}
                     required
                 />
 
                 <label className="form__input-signature">E-mail</label>
                 <input
-                    onChange={handleDataNewUser}
+                    onChange={handleChange}
                     className="form__input"
                     type="email"
                     id="email-register"
                     placeholder="E-mail"
                     name="email"
+                    value={values.email || ''}
+                    pattern='[a-z0-9]+@[a-z]+\.[a-z]{2,3}'
                     required
                 />
                 <label className="form__input-signature">Пароль</label>
                 <input
-                    onChange={handleDataNewUser}
+                    onChange={handleChange}
                     className="form__input form__input-reg"
                     type="password"
                     id="password-register"
                     name="password"
                     placeholder="Пароль"
+                    value={values.password || ''}
                     required
                 />
                 {
@@ -87,8 +75,11 @@ function Register({ handleRegister }) {
                         : ''
                 }
 
-                <button className="form__button form__button-register" type="submit">Зарегистрироваться</button>
-                <p className="form__button-signature">Уже зарегистрированы? <Link className="form__link" to="/signin">Войти</Link></p>
+                <div className="button__container">
+                    <span className="error">{error}</span>
+                    <button className={`form__button form__button-register ${isValid ? '' : 'button__noactive'}`} type="submit">Зарегистрироваться</button>
+                    <p className="form__button-signature">Уже зарегистрированы? <Link className="form__link" to="/signin">Войти</Link></p>
+                </div>
             </Form>
 
         </section>
@@ -96,3 +87,4 @@ function Register({ handleRegister }) {
 };
 
 export default Register;
+
