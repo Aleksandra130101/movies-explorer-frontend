@@ -3,13 +3,12 @@ import { Link } from "react-router-dom";
 import Form from "../Form/Form";
 import './Register.css';
 import { validName } from "../../utils/constants";
-import ValidateForm from "../../hook/ValidateForm.js";
-import { useState } from "react";
+import useValidateForm from "../../hook/useValidateForm.js";
 
 
 function Register({ handleRegister, error }) {
 
-    const { values, handleChange, isValid, resetForm } = ValidateForm();
+    const { values, handleChange, errors, isValid, resetForm } = useValidateForm();
 
     useEffect(() => {
         resetForm()
@@ -45,6 +44,12 @@ function Register({ handleRegister, error }) {
                     pattern={validName}
                     required
                 />
+                <span className="form__input-error">
+                    {errors['name']
+                    ? "Минимум 2 символа. Используйте только латиницу, криллицу, пробел или дефис"
+                    : ''
+                    }
+                </span>
 
                 <label className="form__input-signature">E-mail</label>
                 <input
@@ -58,6 +63,13 @@ function Register({ handleRegister, error }) {
                     pattern='[a-z0-9]+@[a-z]+\.[a-z]{2,3}'
                     required
                 />
+                <span className="form__input-error">
+                    {errors['email']
+                    ? "Введите адрес электронной почты, используя шаблон: example@mail.com"
+                    : ''
+                    }
+                </span>
+
                 <label className="form__input-signature">Пароль</label>
                 <input
                     onChange={handleChange}
@@ -69,11 +81,12 @@ function Register({ handleRegister, error }) {
                     value={values.password || ''}
                     required
                 />
-                {
-                    !isValid
-                        ? <span className="form__input-error">Что-то пошло не так...</span>
-                        : ''
-                }
+                <span className="form__input-error">
+                    {errors['password']
+                    ? "Это обязательное поле"
+                    : ''
+                    }
+                </span>
 
                 <div className="button__container">
                     <span className="error">{error}</span>

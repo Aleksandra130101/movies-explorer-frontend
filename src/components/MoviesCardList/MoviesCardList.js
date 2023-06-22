@@ -11,6 +11,7 @@ function MoviesCardList({
   handleLikeClick,
   handleDeleteLikeClick,
   isSaved,
+  isNotFoundKeyword,
   isNotFound
 }) {
 
@@ -25,11 +26,13 @@ function MoviesCardList({
       return res
     }, false)
   }
-
+//console.log(isNotFoundKeyword);
   return (
     <section className="movies">
       {
-        isNotFound
+        isNotFoundKeyword
+        ? <p className="movies__not-found">Для поиска фильма необходимо ввести ключевое слово</p>
+        : isNotFound
           ? <p className="movies__not-found">Ничего не найдено</p>
           : (
             <>

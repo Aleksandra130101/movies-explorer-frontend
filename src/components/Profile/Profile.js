@@ -31,113 +31,112 @@ function Profile({ signout, setCurrentUser, currentUser }) {
             [name]: value,
         })
 
-        if (e.target.validationMessage) {
-            setIsValid(false)
+
+        if (({...formValue, [name]: value}.email === currentUser.email  && {...formValue,[name]: value}.name === currentUser.name) || (e.target.validationMessage)){
+            //console.log('невалидно')
+            setIsValid(false);
         } else {
-            setIsValid(true)
+            //console.log('валидно')
+            setIsValid(true);
         }
     }
 
     function handleSubmit(e) {
         e.preventDefault();
 
-        setIsShow(true);
+        apiMain.updateProfile(formValue)
+            .then(() => {
+                setCurrentUser({
+                    ...currentUser,
+                    email: formValue.email,
+                    name: formValue.name,
+                })
+                setIsShow(true);
+                setIsEdit(false);
+            })
+            .catch((err) => {
+                setErrors(errors.USER_NOT_UNIQUE);
+                console.log(err);
+            })
 
         setTimeout(() => {
-            if (formValue.name === currentUser.name && formValue.email === currentUser.email) {
-                setIsEdit(false);
-                return
-            }
-
-            apiMain.updateProfile(formValue)
-                .then(() => {
-                    setCurrentUser({
-                        ...currentUser,
-                        email: formValue.email,
-                        name: formValue.name,
-                    })
-                    setIsEdit(false);
-                    setIsShow(false);
-                })
-                .catch((err) => {
-                    setErrors(errors.USER_NOT_UNIQUE);
-                    console.log(err);
-                })
-        }, 3000)
-
+            setIsShow(false);
+        }, 1000)
     }
 
-    function handleOpenEditForm() {
-        setIsEdit(true);
-    }
 
-    return (
-        <section className="profile">
-            <div className="profile__container">
-                <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
 
-                <div className="profile__about">
-                    <div className="profile__user">
-                        <p className="user-property">Имя</p>
+function handleOpenEditForm() {
+    setIsEdit(true);
+}
 
-                        {isEdit
-                            ? <input
-                                className="user-property"
-                                placeholder="Имя"
-                                defaultValue={currentUser.name}
-                                name="name"
-                                type="text"
-                                id="name"
-                                required
-                                minLength="2"
-                                maxLength="30"
-                                onChange={handleChange}
-                                pattern={validName}
-                            />
-                            : <p className="user-property">{currentUser.name}</p>
-                        }
+return (
+    <section className="profile">
+        <div className="profile__container">
+            <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
 
-                    </div>
-                    <div className="profile__user">
-                        <p className="user-property">E-mail</p>
+            <div className="profile__about">
+                <div className="profile__user">
+                    <p className="user-property">Имя</p>
 
-                        {isEdit
-                            ? <input
-                                className="user-property"
-                                placeholder="Email"
-                                defaultValue={currentUser.email}
-                                name="email"
-                                type="email"
-                                id="email"
-                                required
-                                minLength="2"
-                                maxLength="30"
-                                onChange={handleChange}
-                                pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
-                            />
-                            : <p className="user-property">{currentUser.email}</p>
-                        }
-
-                    </div>
+                    {isEdit
+                        ? <input
+                            className="user-property"
+                            placeholder="Имя"
+                            defaultValue={currentUser.name}
+                            name="name"
+                            type="text"
+                            id="name"
+                            required
+                            minLength="2"
+                            maxLength="30"
+                            onChange={handleChange}
+                            pattern={validName}
+                        />
+                        : <p className="user-property">{currentUser.name}</p>
+                    }
 
                 </div>
-                {isShow && <span className="edit-success">Данные сохранены!!!</span>}
-                {isEdit
-                    ? <>
-                        <span className="error">{error}</span>
-                        <button onClick={handleSubmit} className={`profile__saved ${isValid ? '' : 'button__noactive'}`} type="submit" disabled={isValid ? false : true}>Сохранить</button>
-                    </>
+                <div className="profile__user">
+                    <p className="user-property">E-mail</p>
 
-                    : <>
-                        <button onClick={handleOpenEditForm} className='profile__edit' type='button'>Редактировать</button>
-                        <button onClick={signout} className='profile__logout'>Выйти из аккаунта</button>
-                    </>
-                }
+                    {isEdit
+                        ? <input
+                            className="user-property"
+                            placeholder="Email"
+                            defaultValue={currentUser.email}
+                            name="email"
+                            type="email"
+                            id="email"
+                            required
+                            minLength="2"
+                            maxLength="30"
+                            onChange={handleChange}
+                            pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
+                        />
+                        : <p className="user-property">{currentUser.email}</p>
+                    }
+
+                </div>
 
             </div>
+            {isShow && <span className="edit-success">Данные сохранены!!!</span>}
+            {isEdit
+                ? <>
+                    <span className="error">{error}</span>
+                    <button onClick={handleSubmit} className={`profile__saved ${isValid ? '' : 'button__noactive'}`} type="submit" disabled={isValid ? false : true}>Сохранить</button>
+                </>
 
-        </section>
-    )
+                : <>
+                    <button onClick={handleOpenEditForm} className='profile__edit' type='button'>Редактировать</button>
+                    <button onClick={signout} className='profile__logout'>Выйти из аккаунта</button>
+                </>
+            }
+
+        </div>
+
+    </section>
+)
 };
 
 export default Profile;

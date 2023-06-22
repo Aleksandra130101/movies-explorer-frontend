@@ -14,21 +14,20 @@ function Movies({
     handleLikeClick,
     handleDeleteLikeClick,
     setIsCheked,
+    isNotFoundKeyword,
     isNotFound,
     isCheked,
     handleChecked,
     setShortFilms
 }) {
-
     const [visibleItems, setVisibleItems] = useState(7);
     const [quantityAddItems, setQuantityAddItems] = useState(5);
-    const [showButton, setShowButton] = useState(false);
 
     //const savedMovies = JSON.parse(localStorage.getItem('saved-movies'));
 
 
     useEffect(() => {
-        
+
         if (window.innerWidth <= 320) {
             setVisibleItems(5);
             setQuantityAddItems(5);
@@ -62,7 +61,11 @@ function Movies({
 
     return (
         <div className="container-movies">
-            <SearchForm handleSearchMovies={handleSearchMovies} handleChecked={handleChecked} setShortFilms={setShortFilms}/>
+            <SearchForm
+                handleSearchMovies={handleSearchMovies}
+                handleChecked={handleChecked}
+                setShortFilms={setShortFilms}
+            />
             {moviesLoading
                 ? (
                     <Preloader />
@@ -76,6 +79,7 @@ function Movies({
                         handleLikeClick={handleLikeClick}
                         handleDeleteLikeClick={handleDeleteLikeClick}
                         isSaved={false}
+                        isNotFoundKeyword={isNotFoundKeyword}
                         isNotFound={isNotFound}
                     />
                 )

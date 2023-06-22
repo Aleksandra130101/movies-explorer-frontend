@@ -1,51 +1,80 @@
 import React from "react";
 import './SearchForm.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 function SearchForm({ handleSearchMovies, handleChecked }) {
 
-    const [inputValue, setInputValue] = useState({ movie: JSON.parse(localStorage.getItem('keyword')) || '' });
-    const [isChecked, setIsChecked] = useState(JSON.parse(localStorage.getItem('isChecked') || false));
+    const location = useLocation();
+
+    const [isChecked, setIsChecked] = useState(false);
+    const [keyword, setKeyword] = useState('');
+
+    useEffect(() => {
+        if (location.pathname === '/movies' && localStorage.getItem('isChecked')) {
+            setIsChecked(JSON.parse(localStorage.getItem('isChecked')));
+        } else {
+            //console.log('не получилось');
+            //console.log(JSON.parse(localStorage.getItem('isChecked')))
+            setIsChecked(false);
+        }
+        if (location.pathname === '/movies' && localStorage.getItem('keyword')) {
+            setKeyword(JSON.parse(localStorage.getItem('keyword')));
+            //console.log(JSON.parse(localStorage.getItem('keyword')));
+        } else {
+            //console.log(JSON.parse(localStorage.getItem('keyword')));
+            setKeyword('');
+        }
+    }, []);
 
     function onSearchMovies(e) {
         e.preventDefault();
+        //console.log('Прив');
+        //console.log(keyword);
 
-        if (inputValue.movie === '') {
-            localStorage.setItem('keyword', JSON.stringify(''));
+        if (keyword !== '') {
+            setKeyword(keyword);
         } else {
-            localStorage.setItem('keyword', JSON.stringify(inputValue.movie));
+            setKeyword('');
         }
-        handleSearchMovies();
+
+        if (location.pathname === '/movies') {
+            localStorage.setItem('keyword', JSON.stringify(keyword))
+            //console.log(JSON.parse(localStorage.getItem('keyword')));
+        }
+
+        setTimeout(() => {
+            handleSearchMovies(keyword, isChecked);
+        }, 1000);
     }
 
     function handleDataMovie(e) {
-        const { name, value } = e.target;
+        
+        const { value } = e.target;
 
-        setInputValue({ [name]: value });
+        setKeyword(value);
     }
 
     function onChecked(e) {
-        setIsChecked(e.target.checked)
 
         if (e.target.checked) {
-            localStorage.setItem('isChecked', JSON.stringify(e.target.checked))
+            setIsChecked(e.target.checked)
         } else {
-            localStorage.removeItem('isChecked');
+            setIsChecked(false);
         }
-
-        handleChecked(e.target.checked);
+        handleChecked(e.target.checked, keyword);
     }
 
     return (
         <section className="search-form">
             <div className="search-form__container">
                 <form className="form-movie">
-                    <input onChange={handleDataMovie} className="form-movie__input" id="nameProfile" type="text" placeholder="Фильм" value={inputValue.movie} name="movie"></input>
-                    <button onClick={onSearchMovies} className="form-movie__button" type="submit"></button>
+                    <input onChange={handleDataMovie}  className="form-movie__input" id="nameProfile" type="text" placeholder="Фильм" value={keyword || ''} name="movie"></input>
+                    <button onClick={onSearchMovies}  className="form-movie__button" type="submit"></button>
                 </form>
 
                 <label className="checkbox" htmlFor="checkbox">
-                    <input className="checkbox__input" type="checkbox" id="checkbox" onChange={onChecked} checked={isChecked}></input>
+                    <input onChange={onChecked} className="checkbox__input" type="checkbox" id="checkbox"  checked={isChecked}></input>
 
                     <span className="checkbox__inner">Короткометражки</span>
                 </label>

@@ -1,8 +1,6 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm.js";
-import { apiMain } from "../../utils/MainApi";
 import './SavedMovies.css';
 
 function SavedMovies({
@@ -10,12 +8,9 @@ function SavedMovies({
     handleSearchMovies,
     handleDeleteMovies,
     handleSavedMovies,
-    handleChecked
+    handleChecked,
+    isNotFound,
 }) {
-    
-    useEffect(() => {
-        localStorage.removeItem('keyword');
-    }, [])
 
 
     return (
@@ -27,6 +22,7 @@ function SavedMovies({
                 isSaved={true}
                 handleDeleteLikeClick={handleDeleteMovies}
                 handleLikeClick={handleSavedMovies}
+                isNotFound={isNotFound}
             />
         </div>
     )

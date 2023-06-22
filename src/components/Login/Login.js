@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import './Login.css';
 import { Link } from 'react-router-dom';
-import ValidateForm from "../../hook/ValidateForm";
+import useValidateForm from "../../hook/useValidateForm";
 import Form from "../Form/Form";
 
 
 function Login({ handleLogin, error }) {
 
-    const { values, handleChange, errors, isValid, resetForm } = ValidateForm();
+    const { values, handleChange, errors, isValid, resetForm } = useValidateForm();
 
 
     useEffect(() => {
@@ -19,10 +19,7 @@ function Login({ handleLogin, error }) {
         console.log(values)
 
 
-        handleLogin(values.email, values.password)
-        //.then(() => {
-        //  setFormValue({ email: '', password: '' });
-        //})
+        handleLogin(values.email, values.password);
     }
 
     return (
@@ -43,7 +40,16 @@ function Login({ handleLogin, error }) {
                     required
                     value={values.email || ''}
                     pattern='[a-z0-9]+@[a-z]+\.[a-z]{2,3}'
+
                 />
+                <span className="form__input-error">
+                    {errors['email']
+                        ? "Введите адрес электронной почты, используя шаблон: example@mail.com"
+                        : ''
+                    }
+                </span>
+
+
                 <label className="form__input-signature">Пароль</label>
                 <input
                     onChange={handleChange}
@@ -55,11 +61,12 @@ function Login({ handleLogin, error }) {
                     value={values.password || ''}
                     required
                 />
-                {
-                    !isValid
-                        ? <span className="form__input-error">Что-то пошло не так...</span>
+                <span className="form__input-error">
+                    {errors['password']
+                        ? "Это обязательное поле"
                         : ''
-                }
+                    }
+                </span>
 
                 <div className="button__container">
                     <span className="error">{error}</span>

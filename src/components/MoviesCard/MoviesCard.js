@@ -1,9 +1,5 @@
-import React, { useContext } from "react";
-
 import './MoviesCard.css';
-import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 function MoviesCard({isFavorite, ...props}) {    
 
     function onLikeClick() {
@@ -29,9 +25,9 @@ function MoviesCard({isFavorite, ...props}) {
     return (
         <div className="movie">
             <div className="movie__direction">
-                <h3 className="movie__name">{props.movie.nameRU}</h3>
+                <h3 onClick={onOpenTrailer} className="movie__name">{props.movie.nameRU}</h3>
 
-                <p className="movie__duration">{Math.floor(props.movie.duration / 60) + " ч "+ (props.movie.duration % 60 === 0 ? "" : props.movie.duration % 60 + " м")}</p>
+                <p onClick={onOpenTrailer} className="movie__duration">{Math.floor(props.movie.duration / 60) + " ч "+ (props.movie.duration % 60 === 0 ? "" : props.movie.duration % 60 + " м")}</p>
 
                 {location.pathname === '/movies'  && !isFavorite && (
                     <button className="movie__like-button" onClick={onLikeClick} type="button"/>
