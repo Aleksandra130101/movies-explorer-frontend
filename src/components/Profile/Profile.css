@@ -20,10 +20,6 @@
     font-weight: 500;
 }
 
-.profile__about {
-    margin-bottom: 220px;
-}
-
 .profile__user {
     display: flex;
     justify-content: space-between;
@@ -34,8 +30,9 @@
     padding-bottom: 16px;
 }
 
-.profile__user:last-child {
+.profile__user:nth-child(2) {
     margin-top: 17px;
+    margin-bottom: 220px;
 }
 
 .user-property {
@@ -71,6 +68,14 @@
 .button__noactive {
    pointer-events: none;
    opacity: 0.7;
+}
+
+.profile__button-container {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
 }
  
 .profile__edit {

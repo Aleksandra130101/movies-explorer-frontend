@@ -11,9 +11,10 @@ export const validProfileName = /^[а-яА-ЯёЁa-zA-Z0-9 -]+$/;
 export const validEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 
-export const errors = {
+export const errorsRequest = {
   USER_NOT_UNIQUE: 'Пользователь с таким email уже существует.',
   INCORRENT_EMAIL_PASSWORD: 'Вы ввели неправильный email или пароль',
+  INCORRENT_DATE: 'Переданы некорректные данные',
 }
 
 

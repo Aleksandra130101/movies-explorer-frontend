@@ -26,6 +26,7 @@ function useValidateForm() {
 
     return {
         values,
+        setValues,
         handleChange,
         errors,
         isValid,

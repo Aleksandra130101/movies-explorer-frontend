@@ -15,7 +15,7 @@ import { apiMain } from "../../utils/MainApi";
 import { apiMovies } from "../../utils/MoviesApi";
 import { Route, Routes, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect } from "react";
-import { errors } from "../../utils/constants";
+import { errorsRequest } from "../../utils/constants";
 
 import PopupWithMenu from "../PopupWithMenu/PopuWithMenu";
 
@@ -103,12 +103,17 @@ function App() {
         return apiMain.register(name, email, password)
             .then(() => {
                 setRegisterIn(!registerIn);
-                console.log('Регистрация прошла успешно');
+                //console.log('Регистрация прошла успешно');
                 handleLogin(email, password);
                 setErrorReg('');
             })
             .catch((err) => {
-                setErrorReg(errors.USER_NOT_UNIQUE);
+                if (err.includes('409')) {
+                    setErrorReg(errorsRequest.USER_NOT_UNIQUE);
+                }
+                if (err.includes('400')) {
+                    setErrorReg(errorsRequest.INCORRENT_DATE);
+                }
                 console.log(err);
             })
     }
@@ -117,7 +122,7 @@ function App() {
     function handleLogin(email, password) {
         return apiMain.authorize(email, password)
             .then((data) => {
-                //console.log(data);
+                
                 if (data.token) {
                     setLoggedIn(true);
                     localStorage.setItem('token', data.token);
@@ -127,17 +132,22 @@ function App() {
                 }
             })
             .catch((err) => {
-                setErrorLog(errors.INCORRENT_EMAIL_PASSWORD);
+                if (err.includes('401')) {
+                    setErrorLog(errorsRequest.INCORRENT_EMAIL_PASSWORD);
+                }
+                if (err.includes('400')) {
+                    setErrorLog(errorsRequest.INCORRENT_DATE);
+                }
                 console.log(err);
             })
     }
 
     //сохранение нового фильма в Local
-    //function savedFilmInLocal(film) {
-      //  const films = JSON.parse(localStorage.getItem('saved-movies'));
-        //films.push(film);
-        //localStorage.setItem('saved-movies', JSON.stringify(films));
-    //}
+    function savedFilmInLocal(film) {
+        const films = JSON.parse(localStorage.getItem('saved-movies')) || [];
+        films.push(film);
+        localStorage.setItem('saved-movies', JSON.stringify(films));
+    }
 
     //создание и сохранение фильмов
     function handleSavedMovies(movie) {
@@ -151,7 +161,7 @@ function App() {
                     ...currentSavedMovies,
                     data
                 ])
-                //savedFilmInLocal(data);
+                savedFilmInLocal(data);
             })
             .catch((err) => {
                 console.log(err);
@@ -166,8 +176,8 @@ function App() {
                 .then((data) => {
                     setMovies(data);
                     localStorage.setItem('movies', JSON.stringify(data));
-                    console.log(JSON.parse(localStorage.getItem('movies')))
-                    console.log('получили все карточки');
+                    //console.log(JSON.parse(localStorage.getItem('movies')))
+                    //console.log('получили все карточки');
                 })
                 .catch((err) => {
                     console.log(err);
@@ -185,7 +195,7 @@ function App() {
             setIsNotFoundKeyword(false);
             
             const foundMovies = searhByKeyword(JSON.parse(localStorage.getItem('movies')), keyword);
-            console.log(movies);
+            //console.log(movies);
             
             if (foundMovies.length !== 0) {
                 setCurrentMovies(foundMovies);
@@ -242,7 +252,7 @@ function App() {
     }
 
     function searhBySavedKeyword(allSavedMovies, keyword, isChecked) {
-        console.log(isChecked);
+        //console.log(isChecked);
         let foundSavedMovies = [];
         setIsNotFoundKeyword(false);
         allSavedMovies.forEach((movie) => {
@@ -252,10 +262,10 @@ function App() {
         })
         const isShortSavedFilms = isChecked;
         if (isShortSavedFilms) {
-            console.log('чек');
+            //console.log('чек');
             return foundSavedMovies.filter((movie) => movie.duration <= 40);
         } else {
-            console.log('нечек');
+            //console.log('нечек');
             return foundSavedMovies;
         }
     }
@@ -310,11 +320,19 @@ function App() {
                 });
                 setSavedMovies(newSavedMovies);
                 setCurrentSavedMovies(newSavedCurrentMovies);
-                //deleteMovieInLocal(movie);
+                deleteMovieInLocal(movie);
             })
             .catch((err) => {
                 console.log(err);
             })
+    }
+
+    //удаление карточки из local
+    function deleteMovieInLocal(movie) {
+        //console.log(movie.data.movieId);
+        const newLocalFilms = currentSavedMovies.filter((film) => film.movieId !== movie.data.movieId);
+        localStorage.setItem('saved-movies', JSON.stringify(newLocalFilms));
+        //console.log(JSON.parse(localStorage.getItem('saved-movies')));
     }
 
     //выход из аккаунта 
@@ -362,7 +380,9 @@ function App() {
                                 //setIsCheked={setIsCheked}
                                 isNotFoundKeyword={isNotFoundKeyword}
                                 isNotFound={isNotFound}
+                                setIsNotFound={setIsNotFound}
                                 handleChecked={handleChecked}
+                                setSavedMovies={setSavedMovies}
                             />
 
                             <Footer />
@@ -379,7 +399,8 @@ function App() {
                                 handleSavedMovies={handleSavedMovies}
                                 handleChecked={handleSavedChecked}
                                 isNotFound={isNotFound}
-
+                                setSavedMovies={setSavedMovies}
+                                setIsNotFound={setIsNotFound}
                             //isChecked={isChecked}
                             //setIsCheked={setIsCheked}
                             />

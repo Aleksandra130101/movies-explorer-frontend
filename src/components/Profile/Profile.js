@@ -2,60 +2,64 @@ import React, { useState, useEffect } from "react";
 import './Profile.css';
 import { apiMain } from "../../utils/MainApi";
 import { validName } from "../../utils/constants";
-import { errors } from "../../utils/constants";
+import { errorsRequest } from "../../utils/constants";
+import useValidateForm from "../../hook/useValidateForm";
 
 function Profile({ signout, setCurrentUser, currentUser }) {
 
+    const { values, setValues, handleChange, errors, isValid } = useValidateForm();
+
     const [isEdit, setIsEdit] = useState(false);
-    const [formValue, setFormValue] = useState({});
-    const [isValid, setIsValid] = useState(false);
+    //const [formValue, setFormValue] = useState({});
+    //const [isValid, setIsValid] = useState(false);
+    const [disabledForm, setDisabledForm] = useState(true);
+    const [disabledSubmit, setDisabledSubmit] = useState(true);
     const [error, setErrors] = useState('');
     const [isShow, setIsShow] = useState(false);
 
 
 
     useEffect(() => {
-        setFormValue({
+        setValues({
             email: currentUser.email,
             name: currentUser.name,
         })
-    }, [currentUser, setFormValue]);
+    }, [currentUser, setValues]);
+    //console.log(isValid, values);
 
-
-    function handleChange(e) {
-        setErrors('')
-        const { name, value } = e.target;
-
-        setFormValue({
-            ...formValue,
-            [name]: value,
-        })
-
-
-        if (({...formValue, [name]: value}.email === currentUser.email  && {...formValue,[name]: value}.name === currentUser.name) || (e.target.validationMessage)){
-            //console.log('невалидно')
-            setIsValid(false);
-        } else {
-            //console.log('валидно')
-            setIsValid(true);
-        }
-    }
+    useEffect(() => {
+        if (!isValid) {
+            setDisabledSubmit(true);
+            return
+        };
+        setDisabledSubmit(
+            !Object.keys(values).some((key) => values[key] !== currentUser[key])
+        );
+    }, [currentUser, values, isValid]);
 
     function handleSubmit(e) {
         e.preventDefault();
+        setDisabledSubmit(true);
 
-        apiMain.updateProfile(formValue)
+        apiMain.updateProfile(values)
             .then(() => {
                 setCurrentUser({
                     ...currentUser,
-                    email: formValue.email,
-                    name: formValue.name,
+                    email: values.email,
+                    name: values.name,
                 })
-                setIsShow(true);
                 setIsEdit(false);
+                setIsShow(true);
+                setDisabledForm(true);
+                setErrors('');
             })
             .catch((err) => {
-                setErrors(errors.USER_NOT_UNIQUE);
+                if (err.includes('409')) {
+                    setErrors(errorsRequest.USER_NOT_UNIQUE);
+                }
+                if (err.includes('400')) {
+                    setErrors(errorsRequest.INCORRENT_DATE);
+                }
                 console.log(err);
             })
 
@@ -66,24 +70,24 @@ function Profile({ signout, setCurrentUser, currentUser }) {
 
 
 
-function handleOpenEditForm() {
-    setIsEdit(true);
-}
+    function handleOpenEditForm() {
+        setDisabledForm(false);
+        setIsEdit(true);
+    }
 
-return (
-    <section className="profile">
-        <div className="profile__container">
-            <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
+    return (
+        <section className="profile">
+            <div className="profile__container">
+                <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
 
-            <div className="profile__about">
-                <div className="profile__user">
-                    <p className="user-property">Имя</p>
+                <form className="profile__about" onSubmit={handleSubmit}>
+                    <label className="profile__user">
+                        <span className="user-property">Имя</span>
 
-                    {isEdit
-                        ? <input
+                        <input
                             className="user-property"
                             placeholder="Имя"
-                            defaultValue={currentUser.name}
+                            value={values.name || ''}
                             name="name"
                             type="text"
                             id="name"
@@ -92,19 +96,16 @@ return (
                             maxLength="30"
                             onChange={handleChange}
                             pattern={validName}
+                            disabled={disabledForm}
                         />
-                        : <p className="user-property">{currentUser.name}</p>
-                    }
+                    </label>
+                    <label className="profile__user">
+                        <span className="user-property">E-mail</span>
 
-                </div>
-                <div className="profile__user">
-                    <p className="user-property">E-mail</p>
-
-                    {isEdit
-                        ? <input
+                        <input
                             className="user-property"
                             placeholder="Email"
-                            defaultValue={currentUser.email}
+                            value={values.email || ''}
                             name="email"
                             type="email"
                             id="email"
@@ -113,30 +114,30 @@ return (
                             maxLength="30"
                             onChange={handleChange}
                             pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
+                            disabled={disabledForm}
                         />
-                        : <p className="user-property">{currentUser.email}</p>
-                    }
+                    </label>
 
-                </div>
+                    <div className="profile__button-container">
+                        {isShow && <span className="edit-success">Данные сохранены!!!</span>}
+                        {isEdit
+                            ? <>
+                                <span className="error">{error}</span>
+                                <button className={`profile__saved ${disabledSubmit ? 'button__noactive' : ''}`} type="submit" disabled={isValid ? false : true}>Сохранить</button>
+                            </>
 
-            </div>
-            {isShow && <span className="edit-success">Данные сохранены!!!</span>}
-            {isEdit
-                ? <>
-                    <span className="error">{error}</span>
-                    <button onClick={handleSubmit} className={`profile__saved ${isValid ? '' : 'button__noactive'}`} type="submit" disabled={isValid ? false : true}>Сохранить</button>
-                </>
+                            : <>
+                                <button onClick={handleOpenEditForm} className='profile__edit' type='button'>Редактировать</button>
+                                <button onClick={signout} className='profile__logout'>Выйти из аккаунта</button>
+                            </>
+                        }
+                    </div>
+                </form>
 
-                : <>
-                    <button onClick={handleOpenEditForm} className='profile__edit' type='button'>Редактировать</button>
-                    <button onClick={signout} className='profile__logout'>Выйти из аккаунта</button>
-                </>
-            }
+            </div >
 
-        </div>
-
-    </section>
-)
+        </section >
+    )
 };
 
 export default Profile;

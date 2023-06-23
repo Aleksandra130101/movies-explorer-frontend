@@ -18,7 +18,9 @@ function Movies({
     isNotFound,
     isCheked,
     handleChecked,
-    setShortFilms
+    setShortFilms,
+    setIsNotFound,
+    setSavedMovies,
 }) {
     const [visibleItems, setVisibleItems] = useState(7);
     const [quantityAddItems, setQuantityAddItems] = useState(5);
@@ -27,6 +29,8 @@ function Movies({
 
 
     useEffect(() => {
+        setSavedMovies(JSON.parse(localStorage.getItem('saved-movies')) || [])
+        setIsNotFound(false);
 
         if (window.innerWidth <= 320) {
             setVisibleItems(5);

@@ -2,6 +2,7 @@ import React from "react";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm.js";
 import './SavedMovies.css';
+import { useEffect } from "react";
 
 function SavedMovies({
     movies,
@@ -10,7 +11,14 @@ function SavedMovies({
     handleSavedMovies,
     handleChecked,
     isNotFound,
+    setSavedMovies,
+    setIsNotFound
 }) {
+    
+    useEffect(() => {
+        setIsNotFound(false);
+        setSavedMovies(JSON.parse(localStorage.getItem('saved-movies')) || []);
+    }, [])
 
 
     return (
