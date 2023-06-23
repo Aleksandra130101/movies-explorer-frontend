@@ -1,0 +1,142 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-main {
+    flex-shrink: 0;
+    flex-grow: 1;
+    margin-left: 44px;
+}
+
+.navbar-menu {
+    display: none;
+    margin-left: auto;
+}
+
+.navbar-entrance {
+    margin-left: auto;
+}
+
+.navbar__link {
+    text-decoration: none;
+    color: #000;
+}
+
+
+.navbar__link:hover {
+    opacity: 0.7;
+}
+
+.navbar__link-reg {
+    margin-right: 30px;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+}
+
+.navbar__button-log {
+    width: 76px;
+    height: 32px;
+    background-color: #000;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 0;
+}
+
+.navbar__button-log:hover {
+    opacity: 0.7;
+}
+
+.navbar__button-menu {
+    width: 44px;
+    height: 44px;
+    background-color: #fff;
+    background-image: url(../../images/burger.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 0;
+    cursor: pointer;
+}
+
+.navbar__button-menu-pink {
+    background-color: #F3C1F8;
+}
+
+.navbar__button-menu:hover {
+    opacity: 0.7;
+}
+
+.navbar__link-movies {
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 400;
+}
+
+.navbar__link-movies_active {
+    font-weight: 500;
+}
+
+.navbar__link-movies:first-child {
+    margin-right: 16px;
+}
+
+.navbar__accaunt {
+    padding: 9px 12px;
+    border: 2px solid rgba(170, 170, 170, .2);
+    display: flex;
+    border-radius: 50px;
+    text-decoration: none;
+    color: #000;
+}
+
+.navbar__accaunt:hover {
+    opacity: 0.7;
+}
+
+.navbar__accaunt-image {
+    margin-right: 7px;
+    width: 12px;
+    height: 14px;
+}
+
+.navbar__accaunt-text {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar-main {
+        display: none;
+    }
+
+    .navbar-menu {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .navbar__link-reg {
+        font-size: 10px;
+        margin-right: 14px;
+    }
+
+    .navbar__button-log {
+        font-size: 10px;
+        width: 54px;
+        height: 26px;
+    }
+    .navbar__button-menu {
+        width: 40px;
+        height: 43px;
+    }
+}

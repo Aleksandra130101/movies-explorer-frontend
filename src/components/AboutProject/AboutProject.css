@@ -1,0 +1,172 @@
+.about-project {
+    max-width: 1280px;
+    margin: auto;
+    padding: 110px 70px;
+}
+
+.title {
+    border-bottom: 1px solid #000;  
+    margin: 0;
+    padding-bottom: 23px;
+    color: #000;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: -0.04em;
+}
+
+.description {
+    margin: 70px 0 110px 0;
+    display: flex;
+}
+
+.description__item {
+    margin: 0;
+    padding: 0;
+    width: 550px;
+}
+
+.description__item:first-child {
+    margin-right: 40px;
+}
+
+.description__title {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24.2px;
+    letter-spacing: -0.04em;
+}
+
+.description__about {
+    margin: 0;
+    padding: 0;
+    margin-top: 26px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.stages {
+    display: flex;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.stage:first-child {
+    width: 228px;
+}
+
+.stage:last-child {
+    flex-shrink: 0;
+    flex-grow: 1;
+}
+
+.stage__weekends {
+
+    margin: 0;
+    padding: 9px 0;
+    font-weight: 400;
+    text-align: center;
+}
+
+.stage__weekends-one {
+    background-color: #000;
+    color: #fff;
+}
+
+.stage__weekends-four {
+    background-color: #F2F2F2;
+}
+
+.stage__description {
+    margin: 0;
+    padding-top: 14px;
+    text-align: center;
+    font-weight: 400;
+    text-align: center;
+    color: #A0A0A0;
+}
+
+@media screen and (max-width: 767.5px) {
+    .about-project {
+        padding: 90px 50px;
+    }
+
+    .description {
+        margin-bottom: 93px;
+    }
+
+    .description__item {
+        width: 319px;
+    }
+
+    .stage:first-child {
+        width: 140px;
+    }
+
+    .description__item:first-child {
+        margin-right: 30px;
+    }
+
+    .description__about {
+        margin-top: 22px;
+        font-size: 12px;
+        line-height: 18px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .about-project {
+        padding: 70px 18px;
+    }
+
+    .title {
+        padding-bottom: 28px;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .description {
+        margin: 60px 0;
+        flex-direction: column;
+    }
+
+    .description__item {
+        width: 284px;
+    }
+
+    .description__item:first-child {
+        margin-right: 0;
+        margin-bottom: 56px;
+    }
+
+    .description__title {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .description__about {
+        margin-top: 16px;
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+    .stages {
+        font-size: 11px;
+        line-height: 13px;
+    }
+
+    .stage:first-child {
+        width: 100px;
+    }
+
+    .stage__weekends {
+        padding: 11px 0;
+    }
+    .stage__description {
+        padding-top: 10px;
+    }
+
+}

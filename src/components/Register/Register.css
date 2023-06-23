@@ -1,0 +1,19 @@
+
+.form__input-error {
+    color: #FF4062;
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 10px;
+    line-height: 12px;
+    font-weight: 400;
+}
+
+.form__input-reg {
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 767.5px) {
+    .form__button-register {
+        margin-top: 157px;
+    }
+}
